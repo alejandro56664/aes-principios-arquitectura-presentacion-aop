@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 //AOP
-//Configuration
 @Aspect
 @Configuration
 public class AfterAspect {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
+	//point-cut: execution(* com.principios.ejemplo.business.*.*(..))
 	@AfterReturning(value = "execution(* com.principios.ejemplo.business.*.*(..))", 
 			returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
@@ -22,6 +22,7 @@ public class AfterAspect {
 		logger.info("	Despues de retornar el joint-point: '{}' retornó con el valor '{}'", joinPoint, result);
 	}
 	
+	//point-cut: execution(* com.principios.ejemplo.business.*.*(..))
 	@After(value = "execution(* com.principios.ejemplo.business.*.*(..))")
 	public void after(JoinPoint joinPoint) {
 		//Advice
